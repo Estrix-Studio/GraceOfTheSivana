@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -42,10 +43,16 @@ public class PlayerMovement : MonoBehaviour
         if (_isLookingLeft && _currentSpeed.x > 0)
         {
             _isLookingLeft = false;
+            Vector3 v3_scale = transform.localScale;
+            v3_scale.x *= -1;
+            transform.localScale = v3_scale;
         }
         else if (!_isLookingLeft && _currentSpeed.x < 0)
         {
             _isLookingLeft = true;
+            Vector3 v3_scale = transform.localScale;
+            v3_scale.x *= -1;
+            transform.localScale = v3_scale;
         }
         
         _animator.SetBool(_animatorDirectionTag, _isLookingLeft);
