@@ -1,9 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
+/// <summary>
+/// Moves character using old input system
+/// Animates movement
+/// </summary>
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator _animator;
     private readonly string _animatorSpeedTag = "Speed"; 
-    private readonly string _animatorDirectionTag = "IsLookingLeft"; 
 
     private void Start()
     {
@@ -29,32 +28,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        // Read Input
         var moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        
+        // Find deltaPosition, dependent on deltaTime
         _currentSpeed = moveDirection * (Time.deltaTime * speed);
         
+        // Move object
         transform.Translate(_currentSpeed);
     }
 
     private void UpdateAnimator()
     {
+        // pass speed to the animation, speed is magnitude of the deltaPosition vector
         _animator.SetFloat(_animatorSpeedTag, _currentSpeed.magnitude);
         
+        // check if character currently looks at the right side
+        // if looking left, right would be if the character goes right 
         if (_isLookingLeft && _currentSpeed.x > 0)
         {
             _isLookingLeft = false;
-            Vector3 v3_scale = transform.localScale;
-            v3_scale.x *= -1;
-            transform.localScale = v3_scale;
+            Mirror();
         }
         else if (!_isLookingLeft && _currentSpeed.x < 0)
         {
             _isLookingLeft = true;
-            Vector3 v3_scale = transform.localScale;
-            v3_scale.x *= -1;
-            transform.localScale = v3_scale;
+            Mirror();
         }
-        
-        _animator.SetBool(_animatorDirectionTag, _isLookingLeft);
+    }
+
+    private void Mirror()
+    {            
+        // mirror object by scaling by -1 by x axis
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
