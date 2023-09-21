@@ -60,6 +60,6 @@ TagManager:
   - name: ClifRamp
     uniqueID: 452579321
     locked: 0
-  - name: Decor
+  - name: Objects
     uniqueID: 89158077
     locked: 0
