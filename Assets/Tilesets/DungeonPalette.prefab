@@ -35011,7 +35011,7 @@ GameObject:
   - component: {fileID: 3065232393532393678}
   - component: {fileID: 7371665074094119407}
   m_Layer: 0
-  m_Name: Rectangular Palette
+  m_Name: DungeonPalette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
