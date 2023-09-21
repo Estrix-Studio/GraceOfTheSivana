@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81b7d4ae8671524dbdc30011a31a9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 1
 --- !u!95 &75421998
 Animator:
   serializedVersion: 5
@@ -217,8 +217,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1793065567
-  m_SortingLayer: 2
+  m_SortingLayerID: 89158077
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -1030918230, guid: 6a17f84ee87dbfb478c2ca675b364309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 313149630}
   - component: {fileID: 313149632}
   - component: {fileID: 313149631}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -16721,7 +16721,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -16991,7 +16991,7 @@ GameObject:
   - component: {fileID: 1139984499}
   - component: {fileID: 1139984498}
   - component: {fileID: 1139984500}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clifs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17058,7 +17058,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -22646,7 +22646,7 @@ GameObject:
   - component: {fileID: 1202001167}
   - component: {fileID: 1202001166}
   - component: {fileID: 1202001168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ramps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22713,7 +22713,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -22922,7 +22922,7 @@ TilemapCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   m_LayerOverridePriority: 1
   m_ForceSendLayers:
     serializedVersion: 2
@@ -22936,7 +22936,7 @@ TilemapCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22954,7 +22954,7 @@ GameObject:
   - component: {fileID: 1204728785}
   - component: {fileID: 1204728787}
   - component: {fileID: 1204728786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23021,7 +23021,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -25847,7 +25847,7 @@ GameObject:
   - component: {fileID: 1958067798}
   - component: {fileID: 1958067797}
   - component: {fileID: 1958067799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25914,7 +25914,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -46825,7 +46825,7 @@ GameObject:
   - component: {fileID: 2110275454}
   - component: {fileID: 2110275456}
   - component: {fileID: 2110275455}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShadowGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46892,7 +46892,7 @@ TilemapRenderer:
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
-  m_SortOrder: 0
+  m_SortOrder: 3
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
@@ -46991,7 +46991,7 @@ GameObject:
   - component: {fileID: 2121196356}
   - component: {fileID: 2121196358}
   - component: {fileID: 2121196357}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
