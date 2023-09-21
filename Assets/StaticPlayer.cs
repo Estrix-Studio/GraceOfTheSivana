@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class StaticPlayer : MonoBehaviour
 {
-    private static StaticPlayer _instance;
+    private static GameObject _instance;
 
     private void Awake()
     {
-        if (_instance)
+        if (_instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
-            _instance = this;
-            DontDestroyOnLoad(this);
+            _instance = gameObject;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }
