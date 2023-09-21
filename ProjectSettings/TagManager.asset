@@ -42,9 +42,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: Dirt
+    uniqueID: 1181625297
+    locked: 0
+  - name: Grass
+    uniqueID: 1793065567
+    locked: 0
+  - name: Shadow
+    uniqueID: 3928919633
+    locked: 0
+  - name: water
     uniqueID: 2698669881
     locked: 0
-  - name: Chracter
-    uniqueID: 1793065567
+  - name: Clif
+    uniqueID: 3977229463
+    locked: 0
+  - name: ClifRamp
+    uniqueID: 452579321
+    locked: 0
+  - name: Decor
+    uniqueID: 89158077
     locked: 0
