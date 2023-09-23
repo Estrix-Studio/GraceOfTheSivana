@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Moves character using old input system
 /// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField, Range(0, 10)] private float speed;
@@ -11,6 +12,14 @@ public class PlayerMovement : MonoBehaviour
     
     public Vector2 CurrentSpeed => _currentSpeed;
 
+    private Rigidbody2D _rigidbody;
+    
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
+    
+    
     private void Update()
     {
         Move();
@@ -21,10 +30,8 @@ public class PlayerMovement : MonoBehaviour
         // Read Input
         var moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         
-        // Find deltaPosition, dependent on deltaTime
-        _currentSpeed = moveDirection * (Time.deltaTime * speed);
+        _currentSpeed = moveDirection.normalized * speed;
         
-        // Move object
-        transform.Translate(_currentSpeed);
+        _rigidbody.velocity = _currentSpeed;
     }
 }
