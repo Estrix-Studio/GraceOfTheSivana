@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 ///  Animates character based on movementScript
 /// </summary>
-[RequireComponent(typeof(Animator)), RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimatorScript : MonoBehaviour
 {
     // Requiered components to use class
@@ -18,7 +18,9 @@ public class PlayerAnimatorScript : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _playerMovement = GetComponent<PlayerMovement>();
+        _playerMovement = GetComponentInParent<PlayerMovement>();
+        if (_playerMovement == null)
+            throw new MissingComponentException("PlayerMovement component is missing in parent");
     }
     
     private void Update()
