@@ -5,5 +5,5 @@ using UnityEngine;
 public class AnimatedAbility
 {
     public Ability ability;
-    public Animation animation;
+    public AnimationClip animation;
 }
