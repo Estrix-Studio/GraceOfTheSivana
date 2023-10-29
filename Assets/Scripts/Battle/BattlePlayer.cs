@@ -36,5 +36,13 @@ public class BattlePlayer : MonoBehaviour
         {
             UseAbility(1, null);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UseAbility(2, null);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            UseAbility(3, null);
+        }
     }
 }
