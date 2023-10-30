@@ -34,6 +34,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     public void StartBattle(Character enemyCharacter)
     {
         _uiManager.SetUpUI(this);
+        _uiManager.TurnOffUI();
         
         _healthDisplay.SetUp(ControlledCharacter.Health);
         _player.Character.Health.OnDeath += OnPlayerDeath;
