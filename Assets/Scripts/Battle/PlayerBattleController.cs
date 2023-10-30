@@ -10,6 +10,8 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     private BattlePlayer _player;
     private UIPlayerAbilityManager _uiManager;
     private Character _enemyCharacter;
+    private bool _canCastAbility = true;
+    
     
     public IReadOnlyList<Ability> Abilities => _player.Abilities;
     public Character ControlledCharacter => _player.Character;
@@ -19,9 +21,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
         _player = GetComponent<BattlePlayer>();
         _uiManager = FindObjectOfType<UIPlayerAbilityManager>();
     }
-
-
-
+    
     public void StartBattle(Character enemyCharacter)
     {
         _uiManager.SetUpUI(this); 
@@ -57,9 +57,19 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     
     public void UseAbility(int index)
     {
+        if (!_canCastAbility) return;
+        
         _player.UseAbility(index, _enemyCharacter);
+        _canCastAbility = false;
+        _uiManager.TurnOffUI();
     }
 
+    public void AbilityAnimationFinished()
+    {
+        _canCastAbility = true;
+        _uiManager.TurnOnUI();
+    }
+    
     public void Flee()
     {
         print("Fleeing");
