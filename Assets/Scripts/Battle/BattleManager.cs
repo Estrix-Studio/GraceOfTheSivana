@@ -34,8 +34,8 @@ public class BattleManager : MonoBehaviour
     
     private IEnumerator PreBattle()
     {
-        _playerController.StartBattle();
-        _enemyController.StartBattle();
+        _playerController.StartBattle(_enemyController.ControlledCharacter);
+        _enemyController.StartBattle(_playerController.ControlledCharacter);
         yield return new WaitForSeconds(preBattleDelay);
         _state = _isPlayerTurnFirst ? EBattleState.PlayerTurn : EBattleState.EnemyTurn;
         ContinueBattle();

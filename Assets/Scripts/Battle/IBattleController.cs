@@ -4,7 +4,9 @@ public interface IBattleController
 {
     event Action OnTurnEnd;
     
-    void StartBattle();
+    Character ControlledCharacter { get; }
+    
+    void StartBattle(Character enemyCharacter);
     
     void StartTurn();
 }

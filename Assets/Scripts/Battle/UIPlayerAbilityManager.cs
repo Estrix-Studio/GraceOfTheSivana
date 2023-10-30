@@ -30,7 +30,6 @@ public class UIPlayerAbilityManager : MonoBehaviour
         _playerBattleController = battleController;
         var abilities = battleController.Abilities;
 
-        print(abilities.Count);
         for(var index = 0; index < 4; index++)
         {
             var ability = abilities[index];

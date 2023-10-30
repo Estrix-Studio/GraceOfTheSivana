@@ -10,7 +10,8 @@ public class BattlePlayer : MonoBehaviour
     public IReadOnlyList<Ability> Abilities => _activeAbilities.ConvertAll(a => a.ability);
     
     private Character _character;
-
+    public Character Character => _character;
+    
     private Animator _animator;
     
     public void UseAbility(int index, Character target)

@@ -9,18 +9,23 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     
     private BattlePlayer _player;
     private UIPlayerAbilityManager _uiManager;
+    private Character _enemyCharacter;
     
     public IReadOnlyList<Ability> Abilities => _player.Abilities;
+    public Character ControlledCharacter => _player.Character;
     
     private void Awake()
     {
         _player = GetComponent<BattlePlayer>();
         _uiManager = FindObjectOfType<UIPlayerAbilityManager>();
     }
-    
-    public void StartBattle()
+
+
+
+    public void StartBattle(Character enemyCharacter)
     {
-        _uiManager.SetUpUI(this);        
+        _uiManager.SetUpUI(this); 
+        _enemyCharacter = enemyCharacter;
     }
 
     public void StartTurn()
@@ -52,7 +57,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     
     public void UseAbility(int index)
     {
-        _player.UseAbility(index, null);
+        _player.UseAbility(index, _enemyCharacter);
     }
 
     public void Flee()
