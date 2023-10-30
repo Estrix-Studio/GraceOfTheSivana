@@ -9,4 +9,6 @@ public interface IBattleController
     void StartBattle(Character enemyCharacter);
     
     void StartTurn();
+
+    void FullCirclePassed();
 }

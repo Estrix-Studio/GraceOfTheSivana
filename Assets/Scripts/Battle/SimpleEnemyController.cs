@@ -18,7 +18,7 @@ public class SimpleEnemyController : MonoBehaviour, IBattleController
     
     private void Awake()
     {
-        _character = new Character(new Health(100), new Stats());
+        _character = new Character(new Health(100), new Stats(), new Mana(50, 5));
         _healthDisplay = GetComponentInChildren<IHealthDisplay>();
     }
 
@@ -33,7 +33,12 @@ public class SimpleEnemyController : MonoBehaviour, IBattleController
         print("Enemy turn started");
         StartCoroutine(PassTurn());
     }
-    
+
+    public void FullCirclePassed()
+    {
+        _character.Mana.RegenTick();
+    }
+
     private IEnumerator PassTurn()
     {
         yield return new WaitForSeconds(turnDelay);
