@@ -1,11 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Abilities/Attack")]
-public class Attack : Ability
+namespace Abilities
 {
-    
-    public override void Use(Character owner, Character target)
+    [CreateAssetMenu(menuName = "Abilities/Attack")]
+    public class Attack : Ability
     {
+        public override void Use(Character owner, Character target)
+        {
+            Debug.Log($"Character {owner} used Attack on {target}");
+        }
     }
 }
