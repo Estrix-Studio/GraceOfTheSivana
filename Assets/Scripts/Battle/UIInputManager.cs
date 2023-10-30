@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIPlayerAbilityManager : MonoBehaviour
+public class UIInputManager : MonoBehaviour
 {
     public event Action OnEndTurnButtonPressed;
     public event Action OnFleeButtonPressed;

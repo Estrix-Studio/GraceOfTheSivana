@@ -34,6 +34,9 @@ public class BattleManager : MonoBehaviour
     
     private IEnumerator PreBattle()
     {
+        _playerController.ControlledCharacter.Health.OnDeath += () => _state = EBattleState.Lost;
+        _enemyController.ControlledCharacter.Health.OnDeath += () => _state = EBattleState.Won;
+        
         _playerController.StartBattle(_enemyController.ControlledCharacter);
         _enemyController.StartBattle(_playerController.ControlledCharacter);
         yield return new WaitForSeconds(preBattleDelay);
@@ -63,10 +66,10 @@ public class BattleManager : MonoBehaviour
                 StartTurn(_enemyController);
                 break;
             case EBattleState.Won:
-                // TODO show win screen
+                Debug.Log("You won!");
                 break;
             case EBattleState.Lost:
-                // TODO show lose screen
+                Debug.Log("You lost!");
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
