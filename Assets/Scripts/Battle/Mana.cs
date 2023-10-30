@@ -1,9 +1,16 @@
 ﻿using System;
 
-public class Mana
+public interface IReadOnlyMana
 {
-    public float Current { get; }
-    public float Max { get; }
+    float Current { get; }
+    float Max { get; }
+    public event Action OnManaChanged;
+}
+
+public class Mana : IReadOnlyMana
+{
+    public float Current => _current;
+    public float Max => _max;
     
     private float _current;
     private float _max;

@@ -13,6 +13,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     private bool _canCastAbility = true;
     
     private IHealthDisplay _healthDisplay;
+    private IManaDisplay _manaDisplay;
     
     public IReadOnlyList<Ability> Abilities => _player.Abilities;
     public Character ControlledCharacter => _player.Character;
@@ -22,6 +23,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
         _player = GetComponent<BattlePlayer>();
         _uiManager = FindObjectOfType<UIInputManager>();
         _healthDisplay = GetComponentInChildren<IHealthDisplay>();
+        _manaDisplay = GetComponentInChildren<IManaDisplay>();
     }
     
     private void OnDisable()
@@ -32,8 +34,12 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     public void StartBattle(Character enemyCharacter)
     {
         _uiManager.SetUpUI(this);
+        
         _healthDisplay.SetUp(ControlledCharacter.Health);
         _player.Character.Health.OnDeath += OnPlayerDeath;
+        
+        _manaDisplay.SetUp(ControlledCharacter.Mana);
+        
         _enemyCharacter = enemyCharacter;
     }
 
@@ -72,6 +78,9 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     public void UseAbility(int index)
     {
         if (!_canCastAbility) return;
+        if (!_player.Character.Mana.CanSpend(10)) return;
+        
+        _player.Character.Mana.Spend(10);
         
         _player.UseAbility(index, _enemyCharacter);
         _canCastAbility = false;
@@ -86,6 +95,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
     
     private void OnPlayerDeath()
     {
+        _player.Character.Health.OnDeath -= OnPlayerDeath;
         _uiManager.TurnOffUI();
     }
     
