@@ -85,9 +85,4 @@ public class UIInputManager : MonoBehaviour
         _allButtons.Add(dogeButton);
         _allButtons.AddRange(skillButtons);
     }
-
-    private void Start()
-    {
-        TurnOffUI();
-    }
 }
