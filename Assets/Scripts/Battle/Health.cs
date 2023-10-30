@@ -55,10 +55,10 @@ public class Health : IReadOnlyHealth
         if (!_isAlive) return;
         
         _current += amount;
-        OnHealthChanged?.Invoke();
         if (_current > _max)
         {
             _current = _max;
         }
+        OnHealthChanged?.Invoke();
     }
 }

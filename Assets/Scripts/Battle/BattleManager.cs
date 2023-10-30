@@ -7,6 +7,7 @@ public enum EBattleState
     PreBattle,
     PlayerTurn,
     EnemyTurn,
+    FullCircle,
     Won,
     Lost
 }
@@ -51,18 +52,17 @@ public class BattleManager : MonoBehaviour
             _currentController.OnTurnEnd -= ContinueBattle;
             _currentController = null;
         }
-        print(_state);
         switch (_state)
         {
             case EBattleState.PreBattle:
                 StartCoroutine(PreBattle());
                 break;
             case EBattleState.PlayerTurn:
-                _state = EBattleState.EnemyTurn;
+                _state = _isPlayerTurnFirst ? EBattleState.EnemyTurn : EBattleState.FullCircle;
                 StartTurn(_playerController);
                 break;
             case EBattleState.EnemyTurn:
-                _state = EBattleState.PlayerTurn;
+                _state = _isPlayerTurnFirst ? EBattleState.FullCircle : EBattleState.PlayerTurn;
                 StartTurn(_enemyController);
                 break;
             case EBattleState.Won:
@@ -70,6 +70,9 @@ public class BattleManager : MonoBehaviour
                 break;
             case EBattleState.Lost:
                 Debug.Log("You lost!");
+                break;
+            case EBattleState.FullCircle:
+                FullCirclePassed();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -80,5 +83,11 @@ public class BattleManager : MonoBehaviour
     {
         controller.OnTurnEnd += ContinueBattle;
         controller.StartTurn();
+    }
+
+    private void FullCirclePassed()
+    {
+        _state = _isPlayerTurnFirst ? EBattleState.PlayerTurn : EBattleState.EnemyTurn;
+        ContinueBattle();
     }
 }

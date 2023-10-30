@@ -49,7 +49,12 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
      
         _uiManager.TurnOnUI();
     }
-    
+
+    public void FullCirclePassed()
+    {
+        _player.Character.Mana.RegenTick();
+    }
+
     public void EndTurn()
     {
         // TODO turn UI off

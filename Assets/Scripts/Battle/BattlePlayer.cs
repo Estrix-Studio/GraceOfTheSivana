@@ -23,7 +23,7 @@ public class BattlePlayer : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _character = new Character(new Health(100), new Stats());
+        _character = new Character(new Health(100), new Stats(), new Mana(100, 10));
         _activeAbilities.AddRange(playerAbilities.animatedAbilities);
     }
 }
