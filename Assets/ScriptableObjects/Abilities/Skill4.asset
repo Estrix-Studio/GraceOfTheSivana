@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde0351b461e43179849014643951c28, type: 3}
   m_Name: Skill4
   m_EditorClassIdentifier: 
-  Name: Skill 4
+  Name: DoubleDoge
