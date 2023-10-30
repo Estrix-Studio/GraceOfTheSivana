@@ -15,5 +15,9 @@ MonoBehaviour:
   animatedAbilities:
   - ability: {fileID: 11400000, guid: addfd85aa4abcf041bc49927a8acbd0a, type: 2}
     animation: {fileID: 7400000, guid: 8aa063083e7be9a419e716e7029d6147, type: 2}
-  - ability: {fileID: 11400000, guid: addfd85aa4abcf041bc49927a8acbd0a, type: 2}
+  - ability: {fileID: 11400000, guid: dd1bfb5c01cb2964e997db842921e35d, type: 2}
     animation: {fileID: 7400000, guid: 5ff6bde8954f8aa4b9ba5c7745fe94c0, type: 2}
+  - ability: {fileID: 11400000, guid: f835fc5abbc2a2042b5e34a61fa96b42, type: 2}
+    animation: {fileID: 7400000, guid: fa43390d2d6d4704ea6e8fb9fdce06ad, type: 2}
+  - ability: {fileID: 11400000, guid: f8beba9cd4414674995dbcb14a637eeb, type: 2}
+    animation: {fileID: 7400000, guid: 9846356a87b110343a49eab69b72fa0c, type: 2}

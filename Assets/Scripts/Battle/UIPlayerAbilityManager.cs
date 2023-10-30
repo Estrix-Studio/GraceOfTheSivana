@@ -9,12 +9,11 @@ public class UIPlayerAbilityManager : MonoBehaviour
     public event Action OnReappearButtonPressed;
     public event Action<int> OnSkillButtonPressed;
     
+    [SerializeField] private Button endTurnButton;
     [SerializeField] private Button fleeButton;
     [SerializeField] private Button reappearButton;
-    [Space]
-    [SerializeField]private GameObject skillButtonPrefab;
     
-    private Button[] skillButtons;
+    [SerializeField] private Button[] skillButtons;
 
     private PlayerBattleController _playerBattleController;
     
@@ -25,18 +24,18 @@ public class UIPlayerAbilityManager : MonoBehaviour
         var index = 0;
         foreach (var ability in abilities)
         {
-            var button = Instantiate(skillButtonPrefab, transform).GetComponent<Button>();
-            button.transform.position += new Vector3((index+2) * 160, 0, 0);
-            //TODO remove listener on destroy
             var abilityIndex = index;
+            var button = skillButtons[index];
             button.onClick.AddListener(() => OnSkillButtonPressed?.Invoke(abilityIndex));
             var text = button.GetComponentInChildren<TMP_Text>();
             text.text = ability.Name;
             index++;
         }
         
+        endTurnButton.onClick.AddListener(() => _playerBattleController.EndTurn());
         fleeButton.onClick.AddListener(() => OnFleeButtonPressed?.Invoke());
         reappearButton.onClick.AddListener(() => OnReappearButtonPressed?.Invoke());
+        
     }
     
     public void TurnOnUI()
