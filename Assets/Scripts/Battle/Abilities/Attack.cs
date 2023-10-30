@@ -7,6 +7,7 @@ namespace Abilities
     {
         public override void Use(Character owner, Character target)
         {
+            target.TakeDamage(10);
             Debug.Log($"Character {owner} used Attack on {target}");
         }
     }

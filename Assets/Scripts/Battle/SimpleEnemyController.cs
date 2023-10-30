@@ -14,14 +14,18 @@ public class SimpleEnemyController : MonoBehaviour, IBattleController
     
     public Character ControlledCharacter => _character;
 
+    private IHealthDisplay _healthDisplay;
+    
     private void Awake()
     {
         _character = new Character(new Health(100), new Stats());
+        _healthDisplay = GetComponentInChildren<IHealthDisplay>();
     }
 
     public void StartBattle(Character enemyCharacter)
     {
         _player = enemyCharacter;
+        _healthDisplay.SetUp(_character.Health);
     }
 
     public void StartTurn()
