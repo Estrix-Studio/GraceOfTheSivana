@@ -18,33 +18,35 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
         _uiManager = FindObjectOfType<UIPlayerAbilityManager>();
     }
     
-    private void Start()
-    {
-        _uiManager.SetUpUI(this);
-        StartTurn();
-    }
-    
     public void StartBattle()
     {
-        // TODO setup UI here
-        
+        _uiManager.SetUpUI(this);        
     }
 
     public void StartTurn()
     {
         // TODO turn UI on
-        _uiManager.OnSkillButtonPressed += UseAbility;
+        _uiManager.OnEndTurnButtonPressed += EndTurn;
+        _uiManager.OnAttackButtonPressed += () => UseAbility(0);
+        _uiManager.OnDogeButtonPressed += () => UseAbility(1);
         _uiManager.OnFleeButtonPressed += Flee;
-        _uiManager.OnReappearButtonPressed += Reappear;
+        _uiManager.OnReappearButtonPressed += Reappear; 
+        _uiManager.OnSkillButtonPressed += UseAbility;
+     
+        _uiManager.TurnOnUI();
     }
     
     public void EndTurn()
     {
         // TODO turn UI off
-        _uiManager.OnSkillButtonPressed -= UseAbility;
+        _uiManager.OnEndTurnButtonPressed -= EndTurn;
+        _uiManager.OnAttackButtonPressed -= () => UseAbility(0);
+        _uiManager.OnDogeButtonPressed -= () => UseAbility(1);
         _uiManager.OnFleeButtonPressed -= Flee;
         _uiManager.OnReappearButtonPressed -= Reappear;
+        _uiManager.OnSkillButtonPressed -= UseAbility;
         
+        _uiManager.TurnOffUI();
         OnTurnEnd?.Invoke();
     }
     
