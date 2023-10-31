@@ -36,7 +36,7 @@ public class SimpleEnemyController : MonoBehaviour, IBattleController
 
     public void FullCirclePassed()
     {
-        _character.Mana.RegenTick();
+        _character.RegenMana();
     }
 
     private IEnumerator PassTurn()

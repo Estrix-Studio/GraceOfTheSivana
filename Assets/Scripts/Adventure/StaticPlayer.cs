@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Makes player object static between scenes.
+/// </summary>
 public class StaticPlayer : MonoBehaviour
 {
     private static GameObject _instance;

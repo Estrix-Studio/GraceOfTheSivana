@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Used to pass health outside of character.
+/// </summary>
 public interface IReadOnlyHealth
 {
     float Current { get; }
@@ -11,6 +14,10 @@ public interface IReadOnlyHealth
     event Action OnHealthChanged;
 }
 
+/// <summary>
+/// Manages health of character.
+/// Can be extended with future requirements.
+/// </summary>
 public class Health : IReadOnlyHealth
 {
     private float _current;
