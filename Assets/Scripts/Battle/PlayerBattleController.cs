@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Player controller for battle scene.
+/// Connects UI input to character actions.
+/// Used by battle manager to control battle flow.
+/// </summary>
 [RequireComponent(typeof(BattlePlayer))]
 public class PlayerBattleController : MonoBehaviour, IBattleController
 {
@@ -59,7 +65,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
 
     public void FullCirclePassed()
     {
-        _player.Character.Mana.RegenTick();
+        _player.Character.RegenMana();
     }
 
     public void EndTurn()
@@ -81,7 +87,7 @@ public class PlayerBattleController : MonoBehaviour, IBattleController
         if (!_canCastAbility) return;
         if (!_player.Character.Mana.CanSpend(10)) return;
         
-        _player.Character.Mana.Spend(10);
+        _player.Character.SpendMana(10);
         
         _player.UseAbility(index, _enemyCharacter);
         _canCastAbility = false;

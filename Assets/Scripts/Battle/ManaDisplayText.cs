@@ -6,6 +6,11 @@ public interface IManaDisplay
     void SetUp(IReadOnlyMana mana);
 }
 
+
+/// <summary>
+/// Simple display of mana in text form.
+/// Can be replaced in the future with more complex UI using interface IManaDisplay.
+/// </summary>
 [RequireComponent(typeof(TMP_Text))]
 public class ManaDisplayText : MonoBehaviour, IManaDisplay
 {

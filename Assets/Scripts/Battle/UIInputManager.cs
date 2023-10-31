@@ -4,6 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Used to translate button events to code actions
+/// relative to battle scene
+/// </summary>
 public class UIInputManager : MonoBehaviour
 {
     public event Action OnEndTurnButtonPressed;

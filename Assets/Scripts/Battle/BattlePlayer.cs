@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Handles logic for player character in battle.\
+/// sets up character and abilities.
+/// </summary>
 [RequireComponent(typeof(Animator))]
 public class BattlePlayer : MonoBehaviour
 {

@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Used to change map when player enters trigger.
+/// TEMPORARY DEMO SOLUTION
+/// </summary>
 public class MapChanger : MonoBehaviour
 {
     [SerializeField] private string sceneName;

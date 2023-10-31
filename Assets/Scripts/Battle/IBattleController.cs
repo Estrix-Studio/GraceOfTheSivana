@@ -1,5 +1,9 @@
 ﻿using System;
 
+/// <summary>
+/// Connects battle manager and character.
+/// OnTurnEnd should be called within controller work flow.
+/// </summary>
 public interface IBattleController
 {
     event Action OnTurnEnd;

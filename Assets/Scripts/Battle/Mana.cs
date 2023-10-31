@@ -5,8 +5,16 @@ public interface IReadOnlyMana
     float Current { get; }
     float Max { get; }
     public event Action OnManaChanged;
+    
+    bool CanSpend(float amount);
 }
 
+
+/// <summary>
+/// Manages mana of character.
+/// RegenTick should be called from outside.
+/// Can be extended with future requirements.
+/// </summary>
 public class Mana : IReadOnlyMana
 {
     public float Current => _current;

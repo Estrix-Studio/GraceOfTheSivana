@@ -12,6 +12,11 @@ public enum EBattleState
     Lost
 }
 
+/// <summary>
+/// Handles battle game flow.
+/// Scene should have only one battle manager.
+/// Scene should have two characters with IBattleController tagged with appropriate tags.
+/// </summary>
 public class BattleManager : MonoBehaviour
 {
     [SerializeField] private float preBattleDelay = 2f;
