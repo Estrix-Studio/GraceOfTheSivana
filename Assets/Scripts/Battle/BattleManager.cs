@@ -45,7 +45,11 @@ public class BattleManager : MonoBehaviour
         
         _playerController.StartBattle(_enemyController.ControlledCharacter);
         _enemyController.StartBattle(_playerController.ControlledCharacter);
+        
         yield return new WaitForSeconds(preBattleDelay);
+        
+        // if player turn first: player -> enemy -> fullCircle -> player...
+        // if enemy turn first: enemy -> player -> fullCircle -> enemy...
         _nextState = _isPlayerTurnFirst ? EBattleState.PlayerTurn : EBattleState.EnemyTurn;
         ContinueBattle();
     }
@@ -63,10 +67,14 @@ public class BattleManager : MonoBehaviour
                 StartCoroutine(PreBattle());
                 break;
             case EBattleState.PlayerTurn:
+                // if player turn first: *player* -> enemy -> fullCircle.
+                // if enemy turn first: enemy -> *player* -> fullCircle. 
                 _nextState = _isPlayerTurnFirst ? EBattleState.EnemyTurn : EBattleState.FullCircle;
                 StartTurn(_playerController);
                 break;
             case EBattleState.EnemyTurn:
+                // if player turn first: player -> *enemy* -> fullCircle
+                // if enemy turn first: *enemy* -> player -> fullCircle
                 _nextState = _isPlayerTurnFirst ? EBattleState.FullCircle : EBattleState.PlayerTurn;
                 StartTurn(_enemyController);
                 break;
