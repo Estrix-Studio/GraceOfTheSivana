@@ -1,3 +1,4 @@
+using Adventure;
 using UnityEngine;
 
 /// <summary>
@@ -20,5 +21,10 @@ public class StaticPlayer : MonoBehaviour
             _instance = gameObject;
             DontDestroyOnLoad(gameObject);
         }
+    }
+    
+    private void OnDestroy()
+    {
+        SaveLoad.Instance.SavePlayer();
     }
 }
