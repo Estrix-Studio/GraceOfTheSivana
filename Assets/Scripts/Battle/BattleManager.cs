@@ -32,7 +32,7 @@ public class BattleManager : MonoBehaviour
     
     private void Start()
     {
-        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerBattleController>();
+        _playerController = GameObject.FindWithTag("Player").GetComponent<IBattleController>();
         _enemyController = GameObject.FindWithTag("Enemy").GetComponent<IBattleController>();
         _nextState = EBattleState.PreBattle;
         ContinueBattle();
