@@ -33,6 +33,16 @@ namespace Adventure
             doLoad = StaticContext.DoLoad;
         }
 
+        private void Update()
+        {
+            // Save player position if Ctrl+F3 is pressed
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F3))
+            {
+                SavePlayer();
+                print("Saved from keyboard shortcut");
+            }
+        }
+
         private void OnDisable()
         {
             SavePlayer();
