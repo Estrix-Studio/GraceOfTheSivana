@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Abilities
 {
-    [CreateAssetMenu(menuName = "Abilities/Pass")]
-    public class PassAbility : Ability
+    [CreateAssetMenu(menuName = "Abilities/Heal")]
+    public class Heal : Ability
     {
         public override void Use(Character owner, Character target)
         {
-            Debug.Log($"Character {owner} passed their turn.");
+            // todo add stats dependency
+            target.Heal(10);
         }
     }
 }

@@ -1,25 +1,28 @@
 using Adventure;
 using UnityEngine;
 
-/// <summary>
-/// Makes player object static between scenes.
-/// </summary>
-public class StaticPlayer : MonoBehaviour
+namespace Adventure
 {
-    private static GameObject _instance;
-
-    public static GameObject Instance => _instance;
-    
-    private void Awake()
+    /// <summary>
+    /// Makes player object static between scenes.
+    /// </summary>
+    public class StaticPlayer : MonoBehaviour
     {
-        if (_instance != null)
+        private static GameObject _instance;
+
+        public static GameObject Instance => _instance;
+    
+        private void Awake()
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            _instance = gameObject;
-            DontDestroyOnLoad(gameObject);
+            if (_instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _instance = gameObject;
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
     
