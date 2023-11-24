@@ -1,3 +1,4 @@
+using Adventure;
 using UnityEngine;
 
 namespace Adventure
@@ -23,5 +24,10 @@ namespace Adventure
                 DontDestroyOnLoad(gameObject);
             }
         }
+    }
+    
+    private void OnDestroy()
+    {
+        SaveLoad.Instance.SavePlayer();
     }
 }
