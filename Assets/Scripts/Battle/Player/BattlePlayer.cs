@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Core;
-using DataHolders;
+using Battle.Core;
+using Battle.DataHolders;
 using UnityEngine;
 
-namespace Player
+namespace Battle.Player
 {
     /// <summary>
     /// Handles logic for player character in battle.\

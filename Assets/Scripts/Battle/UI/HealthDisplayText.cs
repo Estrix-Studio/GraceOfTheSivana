@@ -1,8 +1,8 @@
-﻿using DataHolders;
+﻿using Battle.DataHolders;
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace Battle.UI
 {
     public interface IHealthDisplay
     {

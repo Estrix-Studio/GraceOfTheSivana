@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DataHolders
+namespace Battle.DataHolders
 {
     /// <summary>
     /// Contains Information about current character ability set.

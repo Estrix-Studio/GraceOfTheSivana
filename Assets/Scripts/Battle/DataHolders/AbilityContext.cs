@@ -1,8 +1,8 @@
 ﻿using System;
-using Core;
+using Battle.Core;
 using UnityEngine;
 
-namespace DataHolders
+namespace Battle.DataHolders
 {
     [Serializable]
     public class AbilityContext

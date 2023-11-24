@@ -1,7 +1,7 @@
-﻿using DataHolders;
+﻿using Battle.DataHolders;
 using UnityEngine;
 
-namespace Abilities
+namespace Battle.Abilities
 {
     [CreateAssetMenu(menuName = "Abilities/DoubleDoge")]
     public class DoubleDoge : Doge

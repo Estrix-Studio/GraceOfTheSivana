@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core;
-using DataHolders;
-using UI;
+using Battle.Core;
+using Battle.DataHolders;
+using Battle.UI;
 using UnityEngine;
 
-namespace Player
+namespace Battle.Player
 {
     /// <summary>
     /// Player controller for battle scene.

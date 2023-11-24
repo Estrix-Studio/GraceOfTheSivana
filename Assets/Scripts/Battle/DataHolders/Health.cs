@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataHolders
+namespace Battle.DataHolders
 {
     /// <summary>
     /// Used to pass health outside of character.

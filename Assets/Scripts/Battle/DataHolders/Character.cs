@@ -1,5 +1,5 @@
 ﻿
-namespace DataHolders
+namespace Battle.DataHolders
 {
     /// <summary>
     /// Non monobehaviour character class.

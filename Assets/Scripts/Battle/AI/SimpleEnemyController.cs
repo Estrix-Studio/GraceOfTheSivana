@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
-using Core;
-using DataHolders;
-using UI;
+using Battle.Core;
+using Battle.DataHolders;
+using Battle.UI;
 using UnityEngine;
 
-namespace AI
+namespace Battle.AI
 {
     public class SimpleEnemyController : MonoBehaviour, IBattleController
     {

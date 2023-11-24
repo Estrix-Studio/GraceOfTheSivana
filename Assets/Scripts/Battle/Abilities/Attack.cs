@@ -1,8 +1,8 @@
-﻿using Core;
-using DataHolders;
+﻿using Battle.Core;
+using Battle.DataHolders;
 using UnityEngine;
 
-namespace Abilities
+namespace Battle.Abilities
 {
     [CreateAssetMenu(menuName = "Abilities/Attack")]
     public class Attack : Ability
