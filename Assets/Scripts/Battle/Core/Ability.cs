@@ -1,7 +1,7 @@
-﻿using DataHolders;
+﻿using Battle.DataHolders;
 using UnityEngine;
 
-namespace Core
+namespace Battle.Core
 {
     /// <summary>
     /// Contains information about ability.

@@ -1,4 +1,4 @@
-﻿namespace DataHolders
+﻿namespace Battle.DataHolders
 {
     public class Stats
     {

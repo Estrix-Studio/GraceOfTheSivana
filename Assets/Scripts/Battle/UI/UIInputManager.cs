@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Player;
+using Battle.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Battle.UI
 {
     /// <summary>
     /// Used to translate button events to code actions

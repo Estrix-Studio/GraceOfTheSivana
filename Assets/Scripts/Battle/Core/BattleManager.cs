@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using Player;
+using Battle.Player;
 using UnityEngine;
 
-namespace Core
+namespace Battle.Core
 {
     public enum EBattleState
     {

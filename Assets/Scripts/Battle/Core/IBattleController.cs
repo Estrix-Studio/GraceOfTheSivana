@@ -1,7 +1,7 @@
 ﻿using System;
-using DataHolders;
+using Battle.DataHolders;
 
-namespace Core
+namespace Battle.Core
 {
     /// <summary>
     /// Connects battle manager and character.

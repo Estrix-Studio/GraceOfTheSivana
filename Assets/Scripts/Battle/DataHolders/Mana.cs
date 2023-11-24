@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataHolders
+namespace Battle.DataHolders
 {
     public interface IReadOnlyMana
     {

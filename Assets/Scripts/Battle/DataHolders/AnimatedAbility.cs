@@ -1,8 +1,8 @@
 ﻿using System;
-using Core;
+using Battle.Core;
 using UnityEngine;
 
-namespace DataHolders
+namespace Battle.DataHolders
 {
     /// <summary>
     /// Used to connect ability with animation in battle.
