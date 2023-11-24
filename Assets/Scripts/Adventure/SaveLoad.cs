@@ -48,43 +48,61 @@ namespace Adventure
             SavePlayer();
         }
 
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneTransferred;
+        }
+
         private void Start()
         {
             print("loading");
             if (doLoad)
             {
-                try
-                {
-                    LoadPlayer();
-                }
-                catch (Exception e)
-                {
-                    // Handle if no file exists
-                    Console.WriteLine(e);
-                    return;
-                }
-
-                if (savedSceneName != SceneManager.GetActiveScene().name)
-                {
-                    // Load other scene, set position once loaded
-                    SceneManager.LoadScene(savedSceneName);
-                    SceneManager.sceneLoaded += OnSceneLoaded;
-                    return;
-                }
-                StaticPlayer.Instance.transform.position = savedPlayerPosition;
+                LoadAndMove();
             }
             else
             {
-                var enterPoint = FindObjectOfType<StartPoint>().transform.position;
-                StaticPlayer.Instance.transform.position = enterPoint;
-                SceneManager.sceneLoaded += OnSceneTransferred;
+                MoveToStartPoint();
             }
+        }
+
+        private void MoveToStartPoint()
+        {
+            var enterPoint = FindObjectOfType<StartPoint>().transform.position;
+            StaticPlayer.Instance.transform.position = enterPoint;
+            SceneManager.sceneLoaded += OnSceneTransferred;
+        }
+
+        private void LoadAndMove()
+        {
+            try
+            {
+                LoadPlayer();
+            }
+            catch (Exception e)
+            {
+                // Handle if no file exists
+                Console.WriteLine(e);
+                return;
+            }
+
+            if (savedSceneName != SceneManager.GetActiveScene().name)
+            {
+                // Load other scene, set position once loaded
+                SceneManager.LoadScene(savedSceneName);
+                SceneManager.sceneLoaded += OnSceneLoaded;
+                return;
+            }
+
+            StaticPlayer.Instance.transform.position = savedPlayerPosition;
+            SceneManager.sceneLoaded += OnSceneTransferred;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             StaticPlayer.Instance.transform.position = savedPlayerPosition;
+            SceneManager.sceneLoaded += OnSceneTransferred;
         }
 
         public void OnSceneTransferred(Scene scene, LoadSceneMode mode)
