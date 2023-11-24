@@ -2,6 +2,8 @@
 using System.Collections;
 using Core;
 using DataHolders;
+using UI;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace AI
@@ -19,87 +21,120 @@ namespace AI
 
         private Animator _animator;
         
-        private void Start()
+        private IHealthDisplay _healthDisplay;
+        private IManaDisplay _manaDisplay;
+        
+        private bool _turnEnded;
+        
+        private void Awake()
         {
             _character = new Character(new Health(100), new Stats(), new Mana(50, 5));
             _animator = GetComponent<Animator>();
+            _healthDisplay = GetComponentInChildren<IHealthDisplay>();
+            _manaDisplay = GetComponentInChildren<IManaDisplay>();
         }
 
         public void StartBattle(Character enemyCharacter)
         {
             _player = enemyCharacter;
+            
+            _healthDisplay.SetUp(ControlledCharacter.Health);
+            _manaDisplay.SetUp(ControlledCharacter.Mana);
+            
         }
 
         public void StartTurn()
         {
-            StartCoroutine(TurnDelay());
+            StartCoroutine(TurnLoop());
         }
 
-        private IEnumerator TurnDelay()
+        private IEnumerator TurnLoop()
         {
-            print("enemy thinking...");
+            _turnEnded = false;
+            var moves = 0;
+            while(!_turnEnded)
+            {
+                print($"enemy thinking... + {moves}");
+                yield return new WaitForSeconds(0.5f);
+                DoMove();
+                moves++;
+                if (!_turnEnded)
+                {
+                    // chance to do another move is 0.75 from previous for each next move
+                    // 1 -> 0.75 -> -> 0.5625 -> 0.421
+                    var chanceToDoAnotherMove = math.pow(0.75, moves);
+
+                    // if random number is bigger than chance -> end turn
+                    if (UnityEngine.Random.Range(0f, 1f) > chanceToDoAnotherMove)
+                    {
+                        _turnEnded = true;
+                    }
+                }
+            }
             yield return new WaitForSeconds(0.5f);
+            OnTurnEnd?.Invoke();
+        }
+        
+        private void DoMove()
+        {
+            // TODO add more skills and logic for choosing them
+            // TODO Ideas: add mana regen, add defense
+            
             // logic for choosing ability
             // if no mana for both -> skip turn (0)
             // if health is full -> attack  (1)
             // if can kill player -> attack (2)
-            // if mana is not enough to heal -> attack (3)
             // if health is lese than 20% -> heal (4)
             // if health is not full, chance to heal is 20% else attack (5)
             // else attack
+
+            var canHeal = _character.Mana.Current >= healAbility.manaCost;
+            var canAttack = _character.Mana.Current >= attackAbility.manaCost;
             
             // if no mana for both -> skip turn (0)
-            if (_character.Mana.Current < healAbility.manaCost && 
-                _character.Mana.Current < attackAbility.manaCost)
+            if (!canHeal && !canAttack)
             {
-                print("Enemy skipped turn");
-                OnTurnEnd?.Invoke();
-                yield break;
+                _turnEnded = true;
+                return;
             }
             // if health is full -> attack  (1)
-            if (_character.Health.IsFull)
+            if (_character.Health.IsFull && canAttack)
             {
                 UseAttack();
-                print("Enemy attacked");
-                OnTurnEnd?.Invoke();
-                yield break;
+                return;
             }
             // if can kill player -> attack (2)
             // damage is fixed for now TODO get data from stats
             var damage = 10;
-            if (_player.Health.Current <= damage)
+            if (_player.Health.Current <= damage && canAttack)
             {
                 UseAttack();
-                print("Enemy attacked");
-                OnTurnEnd?.Invoke();
-                yield break;
+                return;
             }   
             
-            // (3) need think about the condition
-            
             // if health is lese than 20% -> heal (4)
-            if (_character.Health.Current < _character.Health.Max * 0.2f)
+            if (_character.Health.Current < _character.Health.Max * 0.2f && canHeal)
             {
                 UseHeal();
-                print("Enemy healed");
-                OnTurnEnd?.Invoke();
-                yield break;
+                return;
             }
             
-            // if health is not full, chance to heal is 20% else attack (5)
-            if (_character.Health.Current < _character.Health.Max && UnityEngine.Random.Range(0, 100) < 20)
+            // if health is not full, chance to heal is 25% else attack (5)
+            if (_character.Health.Current < _character.Health.Max && canHeal && UnityEngine.Random.Range(0, 100) < 25)
             {
                 UseHeal();
-                print("Enemy healed");
-                OnTurnEnd?.Invoke();
-                yield break;
+                return;
             }   
             
             // else attack
-            UseAttack();
-            print("Enemy attacked");
-            OnTurnEnd?.Invoke();
-            yield break;
+            if (canAttack)
+            {
+                UseAttack();
+                return;
+            }
+            
+            // if here smth went wrong -> end Turn
+            _turnEnded = true;
         }
         
         public void FullCirclePassed()
@@ -109,6 +144,7 @@ namespace AI
         
         private void UseAttack()
         {
+            print("Enemy attacked");
             _character.SpendMana(attackAbility.manaCost);
             attackAbility.ability.Use(_character, _player);
             _animator.Play(attackAbility.animation.name);
@@ -116,6 +152,7 @@ namespace AI
         
         private void UseHeal()
         {
+            print("Enemy healed");
             _character.SpendMana(healAbility.manaCost);
             healAbility.ability.Use(_character, _character);
             _animator.Play(healAbility.animation.name);
