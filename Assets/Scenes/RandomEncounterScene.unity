@@ -991,9 +991,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1579753558}
-  - component: {fileID: 1579753557}
   - component: {fileID: 1579753560}
   - component: {fileID: 1579753559}
+  - component: {fileID: 1579753561}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1001,20 +1001,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1579753557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579753556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a6779db92404d948485afe2789479af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnDelay: 1
-  dummyAbility: {fileID: 11400000, guid: 801604d0b0d786d42be927d1cb65d0e3, type: 2}
 --- !u!4 &1579753558
 Transform:
   m_ObjectHideFlags: 0
@@ -1104,6 +1090,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1579753561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579753556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64fe67a2c802467c9652e0c92a02365f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAbility:
+    ability: {fileID: 11400000, guid: 457e034959750444a98e5c480d8a8c89, type: 2}
+    manaCost: 10
+    animation: {fileID: 7400000, guid: db3b3e221330f844699390c842a012ea, type: 2}
+  attackAbility:
+    ability: {fileID: 11400000, guid: addfd85aa4abcf041bc49927a8acbd0a, type: 2}
+    manaCost: 5
+    animation: {fileID: 7400000, guid: c971e57d912d2ea449634da7e345a39c, type: 2}
 --- !u!1001 &1589243688
 PrefabInstance:
   m_ObjectHideFlags: 0
