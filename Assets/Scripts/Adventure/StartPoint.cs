@@ -1,8 +1,12 @@
 using UnityEngine;
 
-/// <summary>
-/// TEMPORARY DEMO SOLUTION
-/// </summary>
-public class StartPoint : MonoBehaviour
+namespace Adventure
 {
+    /// <summary>
+    /// TEMPORARY DEMO SOLUTION
+    /// </summary>
+    public class StartPoint : MonoBehaviour
+    {
+        
+    }
 }
