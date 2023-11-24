@@ -7,6 +7,6 @@ namespace Adventure
     /// </summary>
     public class StartPoint : MonoBehaviour
     {
-        
+
     }
 }
