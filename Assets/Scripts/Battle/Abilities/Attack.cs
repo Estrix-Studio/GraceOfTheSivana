@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Core;
+using DataHolders;
+using UnityEngine;
 
 namespace Abilities
 {

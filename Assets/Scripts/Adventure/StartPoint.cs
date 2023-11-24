@@ -1,14 +1,17 @@
 using UnityEngine;
 
-/// <summary>
-/// TEMPORARY DEMO SOLUTION
-/// </summary>
-public class StartPoint : MonoBehaviour
+namespace Adventure
 {
-    [SerializeField] private Color backgroundColor;
-    private void Start()
+    /// <summary>
+    /// TEMPORARY DEMO SOLUTION
+    /// </summary>
+    public class StartPoint : MonoBehaviour
     {
-        StaticPlayer.Instance.transform.position = transform.position;
-        StaticPlayer.Instance.GetComponentInChildren<Camera>().backgroundColor = backgroundColor;
+        [SerializeField] private Color backgroundColor;
+        private void Start()
+        {
+            StaticPlayer.Instance.transform.position = transform.position;
+            StaticPlayer.Instance.GetComponentInChildren<Camera>().backgroundColor = backgroundColor;
+        }
     }
 }
