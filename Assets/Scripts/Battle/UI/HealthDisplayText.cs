@@ -1,19 +1,22 @@
-﻿using TMPro;
+﻿using DataHolders;
+using TMPro;
 using UnityEngine;
 
-public interface IHealthDisplay
+namespace UI
 {
-    void SetUp(IReadOnlyHealth health);
-}
+    public interface IHealthDisplay
+    {
+        void SetUp(IReadOnlyHealth health);
+    }
 
 
-/// <summary>
-/// This class is responsible for displaying the health of a character.
-/// In current iteration, it is a simple text display.
-/// </summary>
-[RequireComponent(typeof(TMP_Text))]
-public class HealthDisplayText : MonoBehaviour, IHealthDisplay
-{
+    /// <summary>
+    /// This class is responsible for displaying the health of a character.
+    /// In current iteration, it is a simple text display.
+    /// </summary>
+    [RequireComponent(typeof(TMP_Text))]
+    public class HealthDisplayText : MonoBehaviour, IHealthDisplay
+    {
         private TMP_Text _text;
         private IReadOnlyHealth _health;
         
@@ -63,4 +66,5 @@ public class HealthDisplayText : MonoBehaviour, IHealthDisplay
                 _text.color = normalColor;
             }
         }
+    }
 }
