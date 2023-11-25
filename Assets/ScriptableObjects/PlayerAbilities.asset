@@ -14,10 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatedAbilities:
   - ability: {fileID: 11400000, guid: addfd85aa4abcf041bc49927a8acbd0a, type: 2}
+    manaCost: 10
     animation: {fileID: 7400000, guid: fa43390d2d6d4704ea6e8fb9fdce06ad, type: 2}
+    particle: {fileID: 19800000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
   - ability: {fileID: 11400000, guid: 55a930e052e08be4394a40928ef606f6, type: 2}
+    manaCost: 10
     animation: {fileID: 7400000, guid: 9846356a87b110343a49eab69b72fa0c, type: 2}
+    particle: {fileID: 19800004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
   - ability: {fileID: 11400000, guid: 8585a198d726da94fa93d0ee3f87e44b, type: 2}
+    manaCost: 10
     animation: {fileID: 7400000, guid: a6df6fa6f65411e409c281f81926c30d, type: 2}
+    particle: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   - ability: {fileID: 11400000, guid: af91977d114b6fe4b8a5de2b728c77b6, type: 2}
+    manaCost: 10
     animation: {fileID: 7400000, guid: c19c9a1a7180c104382308f1db4362fe, type: 2}
+    particle: {fileID: 19800004, guid: 757df604761b8ef42831192c70ee1099, type: 3}

@@ -1277,7 +1277,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1fc2a602c49380f40b0af063cb4ee455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1305,10 +1305,12 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: 457e034959750444a98e5c480d8a8c89, type: 2}
     manaCost: 10
     animation: {fileID: 7400000, guid: db3b3e221330f844699390c842a012ea, type: 2}
+    particle: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
   attackAbility:
     ability: {fileID: 11400000, guid: addfd85aa4abcf041bc49927a8acbd0a, type: 2}
     manaCost: 5
     animation: {fileID: 7400000, guid: c971e57d912d2ea449634da7e345a39c, type: 2}
+    particle: {fileID: 19800006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
 --- !u!1001 &1589243688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2117,6 +2119,10 @@ PrefabInstance:
     - target: {fileID: 4901864341600741181, guid: 6c0c9d67649267f4d96f7b32ea7b2f36, type: 3}
       propertyPath: m_Name
       value: BattlePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211915648752497470, guid: 6c0c9d67649267f4d96f7b32ea7b2f36, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8651094842260585365, guid: 6c0c9d67649267f4d96f7b32ea7b2f36, type: 3}
       propertyPath: m_LocalPosition.x

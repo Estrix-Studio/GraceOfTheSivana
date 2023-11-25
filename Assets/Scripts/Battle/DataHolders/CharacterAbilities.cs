@@ -8,6 +8,6 @@ namespace Battle.DataHolders
     [CreateAssetMenu(menuName = "Character/Abilities")]
     public class CharacterAbilities : ScriptableObject
     {
-        public AnimatedAbility[] animatedAbilities;
+        public AbilityContext[] animatedAbilities;
     }
 }
