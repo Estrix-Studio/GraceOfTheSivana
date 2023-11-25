@@ -32,6 +32,8 @@ namespace Battle.UI
     
         private List<Button> _allButtons = new List<Button>();
     
+        private List<Button> _skillButtons = new List<Button>();
+        
         public void SetUpUI(PlayerBattleController battleController)
         {
             _playerBattleController = battleController;

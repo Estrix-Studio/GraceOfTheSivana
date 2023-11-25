@@ -89,9 +89,13 @@ namespace Battle.Player
         public void UseAbility(int index)
         {
             if (!_canCastAbility) return;
-            if (!_player.Character.Mana.CanSpend(10)) return;
+
+            var ability = _player.AbilityContexts[index];
+            var abilityCost = ability.manaCost;
+            
+            if (!_player.Character.Mana.CanSpend(abilityCost)) return;
         
-            _player.Character.SpendMana(10);
+            _player.Character.SpendMana(abilityCost);
         
             _player.UseAbility(index, _enemyCharacter);
             _canCastAbility = false;
