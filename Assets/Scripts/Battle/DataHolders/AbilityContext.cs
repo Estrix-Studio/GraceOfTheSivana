@@ -10,5 +10,6 @@ namespace Battle.DataHolders
         public Ability ability;
         public float manaCost;
         public AnimationClip animation;
+        public ParticleSystem particle;
     }
 }

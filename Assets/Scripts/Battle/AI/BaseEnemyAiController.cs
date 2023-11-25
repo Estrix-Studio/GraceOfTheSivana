@@ -26,6 +26,8 @@ namespace Battle.AI
         
         private bool _turnEnded;
         
+        [SerializeField] private float timeBetweenMoves = 1.0f;
+        
         private void Awake()
         {
             _character = new Character(new Health(100), new Stats(), new Mana(50, 5));
@@ -55,7 +57,7 @@ namespace Battle.AI
             while(!_turnEnded)
             {
                 print($"enemy thinking... + {moves}");
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(timeBetweenMoves);
                 DoMove();
                 moves++;
                 if (!_turnEnded)
@@ -71,7 +73,7 @@ namespace Battle.AI
                     }
                 }
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(timeBetweenMoves);
             OnTurnEnd?.Invoke();
         }
         
@@ -147,7 +149,12 @@ namespace Battle.AI
             print("Enemy attacked");
             _character.SpendMana(attackAbility.manaCost);
             attackAbility.ability.Use(_character, _player);
-            _animator.Play(attackAbility.animation.name);
+            
+            if (attackAbility.animation != null)
+                _animator.Play(attackAbility.animation.name);
+            
+            if (attackAbility.particle != null)
+                PlayAbilityParticle(attackAbility.particle);
         }
         
         private void UseHeal()
@@ -155,7 +162,19 @@ namespace Battle.AI
             print("Enemy healed");
             _character.SpendMana(healAbility.manaCost);
             healAbility.ability.Use(_character, _character);
-            _animator.Play(healAbility.animation.name);
+            
+            if (healAbility.animation != null)
+                _animator.Play(healAbility.animation.name);
+            
+            if (healAbility.particle != null)
+                PlayAbilityParticle(healAbility.particle);
+        }
+        
+        private void PlayAbilityParticle(ParticleSystem particle)
+        {
+            var newParticle = Instantiate(particle, transform);
+            newParticle.transform.localPosition = Vector3.zero;
+            newParticle.Play();
         }
     }
 }
