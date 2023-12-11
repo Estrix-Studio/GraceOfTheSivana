@@ -1,27 +1,28 @@
 using Adventure;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Ui
+namespace Systems.UI
 {
     public class MainMenu : MonoBehaviour
     {
         [SerializeField] public string firstGameplaySceneName;
-
         
         /* Main Menu Scene buttons */
         [SerializeField] private Button startNewGameButton;
         [SerializeField] private Button continueGameButton;
+        [SerializeField] private Button creditsButton;
+        [SerializeField] private Button optionsButton;
         [SerializeField] private Button quitGameButton;
-
-        /* Back Button. Directs to Scenes/MainMenu */
-        [SerializeField] private Button backButton;
+        //[SerializeField] private Button backButton;
 
         private void Start()
         {
             //todo Check if the save file exists
+            EventSystem eventSystem;
         }
 
         private void OnEnable()
@@ -29,7 +30,8 @@ namespace Ui
             startNewGameButton.onClick.AddListener(StartNewGame);
             continueGameButton.onClick.AddListener(ContinueGame);
             quitGameButton.onClick.AddListener(QuitGame);
-            backButton.onClick.AddListener(GoBack);
+            creditsButton.onClick.AddListener(OpenCreditsScene);
+            optionsButton.onClick.AddListener(OpenOptionsScene);
         }
 
         private void OnDisable()
@@ -37,7 +39,8 @@ namespace Ui
             startNewGameButton.onClick.RemoveListener(StartNewGame);
             continueGameButton.onClick.RemoveListener(ContinueGame);
             quitGameButton.onClick.RemoveListener(QuitGame);
-            backButton.onClick.RemoveListener(GoBack);
+            creditsButton.onClick.RemoveListener(OpenCreditsScene);
+            optionsButton.onClick.RemoveListener(OpenOptionsScene);
         }
 
         private void StartNewGame()
@@ -52,18 +55,23 @@ namespace Ui
             SceneManager.LoadScene(firstGameplaySceneName);
         }
 
-        private static void QuitGame()
+        void OpenCreditsScene()
+        {
+            SceneManager.LoadScene("CreditsScene");
+        }
+
+        void OpenOptionsScene()
+        {
+            SceneManager.LoadScene("OptionsScene");
+        }
+
+        private void QuitGame()
         {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
             #else
                 Application.Quit();
             #endif
-        }
-
-        private void GoBack()
-        {
-            SceneManager.LoadSceneAsync("Scenes/MainMenu", LoadSceneMode.Additive);
         }
     }
 }
