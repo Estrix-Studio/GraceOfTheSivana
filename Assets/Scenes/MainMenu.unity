@@ -546,8 +546,9 @@ MonoBehaviour:
   firstGameplaySceneName: SampleScene
   startNewGameButton: {fileID: 971553701}
   continueGameButton: {fileID: 210255542}
+  creditsButton: {fileID: 84679345}
+  optionsButton: {fileID: 1824094017}
   quitGameButton: {fileID: 1395455399}
-  backButton: {fileID: 0}
 --- !u!4 &192879043
 Transform:
   m_ObjectHideFlags: 0
@@ -1586,7 +1587,7 @@ GameObject:
   - component: {fileID: 1447704415}
   - component: {fileID: 1447704414}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1608,8 +1609,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12, y: -186}
-  m_SizeDelta: {x: -920, y: 200}
+  m_AnchoredPosition: {x: 0, y: -145}
+  m_SizeDelta: {x: -717.4, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447704414
 MonoBehaviour:
@@ -1658,8 +1659,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96
-  m_fontSizeBase: 96
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
