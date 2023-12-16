@@ -7,17 +7,16 @@ namespace Adventure
 {
     public class SaveLoad : MonoBehaviour
     {
-        [SerializeField] private bool doLoad;
-
         private const string fileName = "TransformSave.txt";
-    
-        private string SaveDirectory => Application.persistentDataPath + "/Saves/";
-    
-        private string savedSceneName;
+        [SerializeField] private bool doLoad;
         private Vector3 savedPlayerPosition;
-    
+
+        private string savedSceneName;
+
+        private string SaveDirectory => Application.persistentDataPath + "/Saves/";
+
         public static SaveLoad Instance { get; private set; }
-        
+
         private void Awake()
         {
             if (Instance != null)
@@ -26,11 +25,20 @@ namespace Adventure
             }
             else
             {
-                Instance = this; 
+                Instance = this;
                 DontDestroyOnLoad(gameObject);
-            }    
-        
+            }
+
             doLoad = StaticContext.DoLoad;
+        }
+
+        private void Start()
+        {
+            print("loading");
+            if (doLoad)
+                LoadAndMove();
+            else
+                MoveToStartPoint();
         }
 
         private void Update()
@@ -51,19 +59,6 @@ namespace Adventure
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneTransferred;
-        }
-
-        private void Start()
-        {
-            print("loading");
-            if (doLoad)
-            {
-                LoadAndMove();
-            }
-            else
-            {
-                MoveToStartPoint();
-            }
         }
 
         private void MoveToStartPoint()
@@ -105,50 +100,43 @@ namespace Adventure
             SceneManager.sceneLoaded += OnSceneTransferred;
         }
 
-        public void OnSceneTransferred(Scene scene, LoadSceneMode mode)
+        private void OnSceneTransferred(Scene scene, LoadSceneMode mode)
         {
             var enterPoint = FindObjectOfType<StartPoint>().transform.position;
             StaticPlayer.Instance.transform.position = enterPoint;
         }
-        
+
         public void SavePlayer()
         {
             var player = StaticPlayer.Instance;
-            if (player == null )return;
-            
-            if (!Directory.Exists(SaveDirectory))
-            {
-                Directory.CreateDirectory(SaveDirectory);
-            }
-        
-            using (StreamWriter streamWriter = new StreamWriter(SaveDirectory + fileName))
-            {
-                streamWriter.WriteLine(SceneManager.GetActiveScene().name);
-                var position = StaticPlayer.Instance.transform.position;
-                streamWriter.WriteLine(position.x);
-                streamWriter.WriteLine(position.y);
-                streamWriter.WriteLine(position.z);
-            }
+            if (player == null) return;
+
+            if (!Directory.Exists(SaveDirectory)) Directory.CreateDirectory(SaveDirectory);
+
+            using var streamWriter = new StreamWriter(SaveDirectory + fileName);
+            streamWriter.WriteLine(SceneManager.GetActiveScene().name);
+            var position = StaticPlayer.Instance.transform.position;
+            streamWriter.WriteLine(position.x);
+            streamWriter.WriteLine(position.y);
+            streamWriter.WriteLine(position.z);
         }
-    
-    
-        public void LoadPlayer()
+
+
+        private void LoadPlayer()
         {
-            if (!File.Exists(SaveDirectory + fileName)) 
-                throw new Exception("Cannot load player position. File does not exist."); 
-        
-            using (StreamReader streamReader = new StreamReader(SaveDirectory + fileName))
-            {
-                var line = "";
-                line = streamReader.ReadLine();
-                savedSceneName = line;
-                line = streamReader.ReadLine();
-                savedPlayerPosition.x = float.Parse(line);
-                line = streamReader.ReadLine();
-                savedPlayerPosition.y = float.Parse(line);
-                line = streamReader.ReadLine();
-                savedPlayerPosition.z = float.Parse(line);
-            }
+            if (!File.Exists(SaveDirectory + fileName))
+                throw new Exception("Cannot load player position. File does not exist.");
+
+            using var streamReader = new StreamReader(SaveDirectory + fileName);
+            var line = "";
+            line = streamReader.ReadLine();
+            savedSceneName = line;
+            line = streamReader.ReadLine();
+            savedPlayerPosition.x = float.Parse(line);
+            line = streamReader.ReadLine();
+            savedPlayerPosition.y = float.Parse(line);
+            line = streamReader.ReadLine();
+            savedPlayerPosition.z = float.Parse(line);
         }
     }
 }

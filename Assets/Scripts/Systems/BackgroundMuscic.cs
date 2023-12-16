@@ -7,102 +7,99 @@ namespace Systems
     [RequireComponent(typeof(AudioSource))]
     public class BackgroundMusic : MonoBehaviour
     {
-        private static BackgroundMusic _instance;
-        public static BackgroundMusic Instance => _instance;
-        
-        private AudioSource _audioSource;
-        
         [SerializeField] private float fadeDuration = 1.0f;
-        
+
         [SerializeField] private float maxVolume = 1.0f;
 
-        private bool _isPlaying;
-        public bool IsPlaying => _isPlaying; 
-        
-        public event Action OnMusicFaded;
-        
+        private AudioSource _audioSource;
+
         private AudioClip _queuedClip;
-        
+        private static BackgroundMusic Instance { get; set; }
+
+        private bool IsPlaying { get; set; }
+
         private void Awake()
         {
             // On awake, if the other is playing, change tracks
             _audioSource = GetComponent<AudioSource>();
-            
-            if (_instance != null && _instance != this)
+
+            if (Instance != null && Instance != this)
             {
-                _instance.PlayMusic(_audioSource.clip);
+                Instance.PlayMusic(_audioSource.clip);
                 Destroy(gameObject);
                 return;
             }
-        
-            _instance = this;
+
+            Instance = this;
             DontDestroyOnLoad(gameObject);
             PlayMusic();
         }
-    
-        public void PlayMusic()
+
+        public event Action OnMusicFaded;
+
+        private void PlayMusic()
         {
             PlayMusic(_audioSource.clip);
         }
-        
-        public void PlayMusic(AudioClip clip)
+
+        private void PlayMusic(AudioClip clip)
         {
-            if (_isPlaying)
+            if (IsPlaying)
             {
                 QueueMusic(clip);
                 StopMusic();
                 return;
             }
-            
-            _instance._audioSource.clip = clip;
+
+            Instance._audioSource.clip = clip;
             StartCoroutine(FadeVolume(0, maxVolume, fadeDuration));
             _audioSource.Play();
-            _isPlaying = true;
-        } 
-    
-        public void StopMusic()
+            IsPlaying = true;
+        }
+
+        private void StopMusic()
         {
             OnMusicFaded += StopRoutineFinished;
-            StartCoroutine(FadeVolume(_audioSource.volume, 0.0f, fadeDuration));            
+            StartCoroutine(FadeVolume(_audioSource.volume, 0.0f, fadeDuration));
         }
 
         private void StopRoutineFinished()
         {
             OnMusicFaded -= StopRoutineFinished;
             _audioSource.Stop();
-            _isPlaying = false;
+            IsPlaying = false;
             if (_queuedClip != null)
                 PlayQueuedMusic();
         }
-        
+
         private void QueueMusic(AudioClip clip)
         {
             _queuedClip = clip;
         }
-        
-        public void PlayQueuedMusic()
+
+        private void PlayQueuedMusic()
         {
             PlayMusic(_queuedClip);
             _queuedClip = null;
         }
-        
+
         private IEnumerator FadeVolume(float starVolume, float targetVolume, float duration)
         {
-            _instance._audioSource.volume = starVolume;
+            Instance._audioSource.volume = starVolume;
             var startTime = Time.time;
 
             var passedTime = 0.0f;
-            
+
             while (passedTime < duration)
             {
                 passedTime += Time.deltaTime;
                 var percentage = passedTime / duration;
                 var newVolume = Mathf.Lerp(starVolume, targetVolume, percentage);
-                _instance._audioSource.volume = newVolume;
+                Instance._audioSource.volume = newVolume;
                 yield return null;
             }
-        
-            _instance._audioSource.volume = targetVolume;
+
+            Instance._audioSource.volume = targetVolume;
             OnMusicFaded?.Invoke();
         }
     }

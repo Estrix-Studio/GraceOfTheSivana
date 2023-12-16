@@ -3,10 +3,9 @@ using UnityEngine;
 namespace Adventure
 {
     /// <summary>
-    /// TEMPORARY DEMO SOLUTION
+    ///     TEMPORARY DEMO SOLUTION
     /// </summary>
     public class StartPoint : MonoBehaviour
     {
-
     }
 }

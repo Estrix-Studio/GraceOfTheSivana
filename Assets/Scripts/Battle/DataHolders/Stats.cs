@@ -4,8 +4,8 @@
     {
         public float blessing;
         public float mana;
-        public float vitality;
-        public float strength;
         public float movementSpeed;
+        public float strength;
+        public float vitality;
     }
 }
