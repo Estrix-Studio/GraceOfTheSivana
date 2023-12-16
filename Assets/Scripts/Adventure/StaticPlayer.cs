@@ -3,27 +3,25 @@ using UnityEngine;
 namespace Adventure
 {
     /// <summary>
-    /// Makes player object static between scenes.
+    ///     Makes player object static between scenes.
     /// </summary>
     public class StaticPlayer : MonoBehaviour
     {
-        private static GameObject _instance;
+        public static GameObject Instance { get; private set; }
 
-        public static GameObject Instance => _instance;
-    
         private void Awake()
         {
-            if (_instance != null)
+            if (Instance != null)
             {
                 Destroy(gameObject);
             }
             else
             {
-                _instance = gameObject;
+                Instance = gameObject;
                 DontDestroyOnLoad(gameObject);
             }
         }
-        
+
         private void OnDestroy()
         {
             SaveLoad.Instance.SavePlayer();

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Battle.DataHolders
 {
     /// <summary>
-    /// Used to connect ability with animation in battle.
+    ///     Used to connect ability with animation in battle.
     /// </summary>
     [Serializable]
     public class AnimatedAbility
