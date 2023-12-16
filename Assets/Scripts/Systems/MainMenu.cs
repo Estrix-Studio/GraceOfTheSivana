@@ -12,6 +12,7 @@ namespace Ui
 
         [SerializeField] private Button startNewGameButton;
         [SerializeField] private Button continueGameButton;
+        [SerializeField] private Button quitGameButton;
 
         private void Start()
         {
@@ -22,24 +23,35 @@ namespace Ui
         {
             startNewGameButton.onClick.AddListener(StartNewGame);
             continueGameButton.onClick.AddListener(ContinueGame);
+            quitGameButton.onClick.AddListener(QuitGame);
         }
 
         private void OnDisable()
         {
             startNewGameButton.onClick.RemoveListener(StartNewGame);
             continueGameButton.onClick.RemoveListener(ContinueGame);
+            quitGameButton.onClick.RemoveListener(QuitGame);
         }
 
-        public void StartNewGame()
+        private void StartNewGame()
         {
             StaticContext.DoLoad = false;
             SceneManager.LoadScene(firstGameplaySceneName);
         }
 
-        public void ContinueGame()
+        private void ContinueGame()
         {
             StaticContext.DoLoad = true;
             SceneManager.LoadScene(firstGameplaySceneName);
+        }
+
+        private static void QuitGame()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
         }
     }
 }
