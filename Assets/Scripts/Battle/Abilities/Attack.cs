@@ -1,11 +1,16 @@
-﻿
+﻿using Battle.Core;
+using Battle.DataHolders;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Abilities/Attack")]
-public class Attack : Ability
+namespace Battle.Abilities
 {
-    
-    public override void Use(Character owner, Character target)
+    [CreateAssetMenu(menuName = "Abilities/Attack")]
+    public class Attack : Ability
     {
+        public override void Use(Character owner, Character target)
+        {
+            target.TakeDamage(10);
+            Debug.Log($"Character {owner} used Attack on {target}");
+        }
     }
 }
