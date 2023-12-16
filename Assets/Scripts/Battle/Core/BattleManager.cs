@@ -16,23 +16,23 @@ namespace Battle.Core
     }
 
     /// <summary>
-    /// Handles battle game flow.
-    /// Scene should have only one battle manager.
-    /// Scene should have two characters with IBattleController tagged with appropriate tags.
+    ///     Handles battle game flow.
+    ///     Scene should have only one battle manager.
+    ///     Scene should have two characters with IBattleController tagged with appropriate tags.
     /// </summary>
     public class BattleManager : MonoBehaviour
     {
         [SerializeField] private float preBattleDelay = 2f;
         [SerializeField] private bool _isPlayerTurnFirst;
-    
-    
-        private IBattleController _playerController;
-        private IBattleController _enemyController;
-    
-        private EBattleState _nextState;
-    
+
         private IBattleController _currentController;
-    
+        private IBattleController _enemyController;
+
+        private EBattleState _nextState;
+
+
+        private IBattleController _playerController;
+
         private void Start()
         {
             _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerBattleController>();
@@ -40,17 +40,17 @@ namespace Battle.Core
             _nextState = EBattleState.PreBattle;
             ContinueBattle();
         }
-    
+
         private IEnumerator PreBattle()
         {
             _playerController.ControlledCharacter.Health.OnDeath += () => _nextState = EBattleState.Lost;
             _enemyController.ControlledCharacter.Health.OnDeath += () => _nextState = EBattleState.Won;
-        
+
             _playerController.StartBattle(_enemyController.ControlledCharacter);
             _enemyController.StartBattle(_playerController.ControlledCharacter);
-        
+
             yield return new WaitForSeconds(preBattleDelay);
-        
+
             // if player turn first: player -> enemy -> fullCircle -> player...
             // if enemy turn first: enemy -> player -> fullCircle -> enemy...
             _nextState = _isPlayerTurnFirst ? EBattleState.PlayerTurn : EBattleState.EnemyTurn;
@@ -59,11 +59,12 @@ namespace Battle.Core
 
         private void ContinueBattle()
         {
-            if (_currentController!= null)
+            if (_currentController != null)
             {
                 _currentController.OnTurnEnd -= ContinueBattle;
                 _currentController = null;
             }
+
             switch (_nextState)
             {
                 case EBattleState.PreBattle:
@@ -94,7 +95,7 @@ namespace Battle.Core
                     throw new ArgumentOutOfRangeException();
             }
         }
-    
+
         private void StartTurn(IBattleController controller)
         {
             _currentController = controller;
@@ -108,7 +109,7 @@ namespace Battle.Core
 
             _playerController.FullCirclePassed();
             _enemyController.FullCirclePassed();
-        
+
             ContinueBattle();
         }
     }

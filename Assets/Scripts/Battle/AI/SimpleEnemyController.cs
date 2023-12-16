@@ -11,43 +11,41 @@ namespace Battle.AI
     {
         [SerializeField] private float turnDelay = 1f;
         [SerializeField] private Ability dummyAbility;
-    
-        public event Action OnTurnEnd;
-    
-        private Character _character;
-        private Character _player;
-    
-        public Character ControlledCharacter => _character;
 
         private IHealthDisplay _healthDisplay;
-    
+        private Character _player;
+
         private void Awake()
         {
-            _character = new Character(new Health(100), new Stats(), new Mana(50, 5));
+            ControlledCharacter = new Character(new Health(100), new Stats(), new Mana(50, 5));
             _healthDisplay = GetComponentInChildren<IHealthDisplay>();
         }
+
+        public event Action OnTurnEnd;
+
+        public Character ControlledCharacter { get; private set; }
 
         public void StartBattle(Character enemyCharacter)
         {
             _player = enemyCharacter;
-            _healthDisplay.SetUp(_character.Health);
+            _healthDisplay.SetUp(ControlledCharacter.Health);
         }
 
         public void StartTurn()
-        { 
+        {
             print("Enemy turn started");
             StartCoroutine(PassTurn());
         }
 
         public void FullCirclePassed()
         {
-            _character.RegenMana();
+            ControlledCharacter.RegenMana();
         }
 
         private IEnumerator PassTurn()
         {
             yield return new WaitForSeconds(turnDelay);
-            dummyAbility.Use(_character, _player);
+            dummyAbility.Use(ControlledCharacter, _player);
             print("Enemy turn ended");
             OnTurnEnd?.Invoke();
         }
