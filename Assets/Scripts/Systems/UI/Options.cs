@@ -12,6 +12,7 @@ namespace Systems.UI
         [SerializeField] private Slider sfxVolumeSlider;
         [SerializeField] private Slider musicVolumeSlider;
 
+        
         private void Start()
         {
             // Load saved volume settings
@@ -43,18 +44,22 @@ namespace Systems.UI
 
         public void SetSfxVolume(float volume)
         {
-            // Implement setting SFX volume logic here
-            // You may use AudioManager or other methods to handle audio volume
-            PlayerPrefs.SetFloat("SfxVolume", volume);
-            Debug.Log("<color=blue>SFX Volume: " + PlayerPrefs.GetFloat("SfxVolume") + "</color>");
+            // As of our slider goes from 1 to 10 we divide the value by maxValue
+            // and getting float number from 0 to 1 to set into our MusicClip.
+            PlayerPrefs.SetFloat("SfxVolume", volume / musicVolumeSlider.maxValue);
+            Debug.Log("<color=cyan>" +
+                      "SFX Volume: " + PlayerPrefs.GetFloat("SfxVolume")
+                      + "</color>");
         }
 
         public void SetMusicVolume(float volume)
         {
-            // Implement setting MUSIC volume logic here
-            // You may use AudioManager or other methods to handle audio volume
-            PlayerPrefs.SetFloat("MusicVolume", volume);
-            Debug.Log("<color=blue>Music Volume: " + PlayerPrefs.GetFloat("MusicVolume") + "</color>");
+            // As of our slider goes from 1 to 10 we divide the value by maxValue
+            // and getting float number from 0 to 1 to set into our MusicClip.
+            PlayerPrefs.SetFloat("MusicVolume", volume / sfxVolumeSlider.maxValue);
+            Debug.Log("<color=cyan>Music Volume: " + 
+                      PlayerPrefs.GetFloat("MusicVolume")
+                      + "</color>");
         }
 
         private void LoadVolumeSettings()
