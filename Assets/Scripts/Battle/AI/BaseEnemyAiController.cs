@@ -5,44 +5,42 @@ using Battle.DataHolders;
 using Battle.UI;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Battle.AI
 {
     public class BaseEnemyAiController : MonoBehaviour, IBattleController
     {
-        public event Action OnTurnEnd;
-        public Character ControlledCharacter => _character;
-
-        private Character _character;
-        private Character _player;
-        
         [SerializeField] private AbilityContext healAbility;
         [SerializeField] private AbilityContext attackAbility;
 
+        [SerializeField] private float timeBetweenMoves = 1.0f;
+
         private Animator _animator;
-        
+
         private IHealthDisplay _healthDisplay;
         private IManaDisplay _manaDisplay;
-        
+        private Character _player;
+
         private bool _turnEnded;
-        
-        [SerializeField] private float timeBetweenMoves = 1.0f;
-        
+
         private void Awake()
         {
-            _character = new Character(new Health(100), new Stats(), new Mana(50, 5));
+            ControlledCharacter = new Character(new Health(100), new Stats(), new Mana(50, 5));
             _animator = GetComponent<Animator>();
             _healthDisplay = GetComponentInChildren<IHealthDisplay>();
             _manaDisplay = GetComponentInChildren<IManaDisplay>();
         }
 
+        public event Action OnTurnEnd;
+        public Character ControlledCharacter { get; private set; }
+
         public void StartBattle(Character enemyCharacter)
         {
             _player = enemyCharacter;
-            
+
             _healthDisplay.SetUp(ControlledCharacter.Health);
             _manaDisplay.SetUp(ControlledCharacter.Mana);
-            
         }
 
         public void StartTurn()
@@ -50,11 +48,16 @@ namespace Battle.AI
             StartCoroutine(TurnLoop());
         }
 
+        public void FullCirclePassed()
+        {
+            ControlledCharacter.RegenMana();
+        }
+
         private IEnumerator TurnLoop()
         {
             _turnEnded = false;
             var moves = 0;
-            while(!_turnEnded)
+            while (!_turnEnded)
             {
                 print($"enemy thinking... + {moves}");
                 yield return new WaitForSeconds(timeBetweenMoves);
@@ -67,21 +70,19 @@ namespace Battle.AI
                     var chanceToDoAnotherMove = math.pow(0.75, moves);
 
                     // if random number is bigger than chance -> end turn
-                    if (UnityEngine.Random.Range(0f, 1f) > chanceToDoAnotherMove)
-                    {
-                        _turnEnded = true;
-                    }
+                    if (Random.Range(0f, 1f) > chanceToDoAnotherMove) _turnEnded = true;
                 }
             }
+
             yield return new WaitForSeconds(timeBetweenMoves);
             OnTurnEnd?.Invoke();
         }
-        
+
         private void DoMove()
         {
             // TODO add more skills and logic for choosing them
             // TODO Ideas: add mana regen, add defense
-            
+
             // logic for choosing ability
             // if no mana for both -> skip turn (0)
             // if health is full -> attack  (1)
@@ -90,21 +91,23 @@ namespace Battle.AI
             // if health is not full, chance to heal is 20% else attack (5)
             // else attack
 
-            var canHeal = _character.Mana.Current >= healAbility.manaCost;
-            var canAttack = _character.Mana.Current >= attackAbility.manaCost;
-            
+            var canHeal = ControlledCharacter.Mana.Current >= healAbility.manaCost;
+            var canAttack = ControlledCharacter.Mana.Current >= attackAbility.manaCost;
+
             // if no mana for both -> skip turn (0)
             if (!canHeal && !canAttack)
             {
                 _turnEnded = true;
                 return;
             }
+
             // if health is full -> attack  (1)
-            if (_character.Health.IsFull && canAttack)
+            if (ControlledCharacter.Health.IsFull && canAttack)
             {
                 UseAttack();
                 return;
             }
+
             // if can kill player -> attack (2)
             // damage is fixed for now TODO get data from stats
             var damage = 10;
@@ -112,64 +115,60 @@ namespace Battle.AI
             {
                 UseAttack();
                 return;
-            }   
-            
+            }
+
             // if health is lese than 20% -> heal (4)
-            if (_character.Health.Current < _character.Health.Max * 0.2f && canHeal)
+            if (ControlledCharacter.Health.Current < ControlledCharacter.Health.Max * 0.2f && canHeal)
             {
                 UseHeal();
                 return;
             }
-            
+
             // if health is not full, chance to heal is 25% else attack (5)
-            if (_character.Health.Current < _character.Health.Max && canHeal && UnityEngine.Random.Range(0, 100) < 25)
+            if (ControlledCharacter.Health.Current < ControlledCharacter.Health.Max && canHeal &&
+                Random.Range(0, 100) < 25)
             {
                 UseHeal();
                 return;
-            }   
-            
+            }
+
             // else attack
             if (canAttack)
             {
                 UseAttack();
                 return;
             }
-            
+
             // if here smth went wrong -> end Turn
             _turnEnded = true;
         }
-        
-        public void FullCirclePassed()
-        {
-            _character.RegenMana();
-        }
-        
+
         private void UseAttack()
         {
             print("Enemy attacked");
-            _character.SpendMana(attackAbility.manaCost);
-            attackAbility.ability.Use(_character, _player);
-            
+            ControlledCharacter.SpendMana(attackAbility.manaCost);
+            attackAbility.ability.Use(ControlledCharacter, _player);
+
             if (attackAbility.animation != null)
                 _animator.Play(attackAbility.animation.name);
-            
+
             if (attackAbility.particle != null)
                 PlayAbilityParticle(attackAbility.particle);
         }
-        
+
         private void UseHeal()
         {
             print("Enemy healed");
-            _character.SpendMana(healAbility.manaCost);
-            healAbility.ability.Use(_character, _character);
-            
+            ControlledCharacter.SpendMana(healAbility.manaCost);
+            healAbility.ability.Use(ControlledCharacter, ControlledCharacter);
+
             if (healAbility.animation != null)
                 _animator.Play(healAbility.animation.name);
-            
+
             if (healAbility.particle != null)
                 PlayAbilityParticle(healAbility.particle);
         }
-        
+
         private void PlayAbilityParticle(ParticleSystem particle)
         {
             var newParticle = Instantiate(particle, transform);
