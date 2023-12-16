@@ -60,6 +60,8 @@ namespace Systems.UI
             Debug.Log("<color=cyan>Music Volume: " + 
                       PlayerPrefs.GetFloat("MusicVolume")
                       + "</color>");
+            
+            BackgroundMusic.Instance.SetMaxVolume(volume);
         }
 
         private void LoadVolumeSettings()
