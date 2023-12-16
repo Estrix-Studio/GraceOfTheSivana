@@ -8,11 +8,16 @@ namespace Ui
 {
     public class MainMenu : MonoBehaviour
     {
-        [FormerlySerializedAs("FirstGameplaySceneName")] [SerializeField] private string firstGameplaySceneName;
+        [SerializeField] public string firstGameplaySceneName;
 
+        
+        /* Main Menu Scene buttons */
         [SerializeField] private Button startNewGameButton;
         [SerializeField] private Button continueGameButton;
         [SerializeField] private Button quitGameButton;
+
+        /* Back Button. Directs to Scenes/MainMenu */
+        [SerializeField] private Button backButton;
 
         private void Start()
         {
@@ -24,6 +29,7 @@ namespace Ui
             startNewGameButton.onClick.AddListener(StartNewGame);
             continueGameButton.onClick.AddListener(ContinueGame);
             quitGameButton.onClick.AddListener(QuitGame);
+            backButton.onClick.AddListener(GoBack);
         }
 
         private void OnDisable()
@@ -31,6 +37,7 @@ namespace Ui
             startNewGameButton.onClick.RemoveListener(StartNewGame);
             continueGameButton.onClick.RemoveListener(ContinueGame);
             quitGameButton.onClick.RemoveListener(QuitGame);
+            backButton.onClick.RemoveListener(GoBack);
         }
 
         private void StartNewGame()
@@ -52,6 +59,11 @@ namespace Ui
             #else
                 Application.Quit();
             #endif
+        }
+
+        private void GoBack()
+        {
+            SceneManager.LoadSceneAsync("Scenes/MainMenu", LoadSceneMode.Additive);
         }
     }
 }
