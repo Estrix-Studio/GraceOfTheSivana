@@ -14,8 +14,12 @@ namespace Systems
         private AudioSource _audioSource;
 
         private AudioClip _queuedClip;
-        private static BackgroundMusic Instance { get; set; }
 
+        public static BackgroundMusic Instance { get; private set; }
+
+        
+        public AudioClip Clip => _audioSource.clip;
+        
         private bool IsPlaying { get; set; }
 
         private void Awake()
@@ -25,13 +29,17 @@ namespace Systems
 
             if (Instance != null && Instance != this)
             {
-                Instance.PlayMusic(_audioSource.clip);
+                if (Instance.Clip != _audioSource.clip)
+                    Instance.PlayMusic(_audioSource.clip);
+                
                 Destroy(gameObject);
                 return;
             }
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            var volume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+            maxVolume= volume;
             PlayMusic();
         }
 
@@ -63,6 +71,12 @@ namespace Systems
             StartCoroutine(FadeVolume(_audioSource.volume, 0.0f, fadeDuration));
         }
 
+        public void SetMaxVolume(float volume)
+        {
+            maxVolume = volume;
+            _audioSource.volume = volume;
+        }
+        
         private void StopRoutineFinished()
         {
             OnMusicFaded -= StopRoutineFinished;
