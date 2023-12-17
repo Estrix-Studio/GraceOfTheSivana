@@ -59,10 +59,6 @@ namespace Battle.Player
         {
             // TODO turn UI on
             _uiManager.OnEndTurnButtonPressed += EndTurn;
-            _uiManager.OnAttackButtonPressed += () => UseAbility(0);
-            _uiManager.OnDogeButtonPressed += () => UseAbility(1);
-            _uiManager.OnFleeButtonPressed += Flee;
-            _uiManager.OnReappearButtonPressed += Reappear;
             _uiManager.OnSkillButtonPressed += UseAbility;
 
             _uiManager.TurnOnUI();
@@ -77,10 +73,6 @@ namespace Battle.Player
         {
             // TODO turn UI off
             _uiManager.OnEndTurnButtonPressed -= EndTurn;
-            _uiManager.OnAttackButtonPressed -= () => UseAbility(0);
-            _uiManager.OnDogeButtonPressed -= () => UseAbility(1);
-            _uiManager.OnFleeButtonPressed -= Flee;
-            _uiManager.OnReappearButtonPressed -= Reappear;
             _uiManager.OnSkillButtonPressed -= UseAbility;
 
             _uiManager.TurnOffUI();
@@ -113,16 +105,6 @@ namespace Battle.Player
         {
             _player.Character.Health.OnDeath -= OnPlayerDeath;
             _uiManager.TurnOffUI();
-        }
-
-        private void Flee()
-        {
-            print("Fleeing");
-        }
-
-        private void Reappear()
-        {
-            Debug.Log("Reappearing");
         }
     }
 }
