@@ -14,10 +14,6 @@ namespace Battle.UI
     public class UIInputManager : MonoBehaviour
     {
         [SerializeField] private Button endTurnButton;
-        [SerializeField] private Button fleeButton;
-        [SerializeField] private Button attackButton;
-        [SerializeField] private Button dogeButton;
-        [SerializeField] private Button reappearButton;
         [SerializeField] private Button[] skillButtons;
 
         private readonly List<Button> _allButtons = new();
@@ -29,28 +25,16 @@ namespace Battle.UI
         private void Awake()
         {
             _allButtons.Add(endTurnButton);
-            _allButtons.Add(fleeButton);
-            _allButtons.Add(reappearButton);
-            _allButtons.Add(attackButton);
-            _allButtons.Add(dogeButton);
             _allButtons.AddRange(skillButtons);
         }
 
         private void OnDisable()
         {
             endTurnButton.onClick.RemoveAllListeners();
-            fleeButton.onClick.RemoveAllListeners();
-            reappearButton.onClick.RemoveAllListeners();
-            attackButton.onClick.RemoveAllListeners();
-            dogeButton.onClick.RemoveAllListeners();
             foreach (var button in skillButtons) button.onClick.RemoveAllListeners();
         }
 
         public event Action OnEndTurnButtonPressed;
-        public event Action OnFleeButtonPressed;
-        public event Action OnAttackButtonPressed;
-        public event Action OnDogeButtonPressed;
-        public event Action OnReappearButtonPressed;
         public event Action<int> OnSkillButtonPressed;
 
         public void SetUpUI(PlayerBattleController battleController)
@@ -67,12 +51,8 @@ namespace Battle.UI
                 var text = button.GetComponentInChildren<TMP_Text>();
                 text.text = ability.Name;
             }
-
-            attackButton.onClick.AddListener(() => OnAttackButtonPressed?.Invoke());
-            dogeButton.onClick.AddListener(() => OnDogeButtonPressed?.Invoke());
+            
             endTurnButton.onClick.AddListener(() => OnEndTurnButtonPressed?.Invoke());
-            fleeButton.onClick.AddListener(() => OnFleeButtonPressed?.Invoke());
-            reappearButton.onClick.AddListener(() => OnReappearButtonPressed?.Invoke());
         }
 
         public void TurnOnUI()
