@@ -23,9 +23,9 @@ MonoBehaviour:
     particle: {fileID: 0}
   - ability: {fileID: 11400000, guid: 457e034959750444a98e5c480d8a8c89, type: 2}
     manaCost: 10
-    animation: {fileID: 7400000, guid: 7e839dfd06f5e9440b2d1fe6d3c746ec, type: 2}
+    animation: {fileID: 7400000, guid: 9846356a87b110343a49eab69b72fa0c, type: 2}
     particle: {fileID: 0}
   - ability: {fileID: 11400000, guid: 608950cf4841a0e459fe98e5c170f6a8, type: 2}
     manaCost: 20
-    animation: {fileID: 7400000, guid: bf072ad51598e3a46b56d8c6b827584c, type: 2}
+    animation: {fileID: 7400000, guid: c19c9a1a7180c104382308f1db4362fe, type: 2}
     particle: {fileID: 0}
