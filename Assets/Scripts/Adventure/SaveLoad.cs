@@ -108,9 +108,13 @@ namespace Adventure
 
         private void OnSceneTransferred(Scene scene, LoadSceneMode mode)
         {
-                var enterPoint = FindObjectOfType<StartPoint>().transform.position;
-                    
-                StaticPlayer.Instance.transform.position = enterPoint;
+            var enterPoint = FindObjectOfType<StartPoint>();
+            
+                if (enterPoint == null) return;
+                if (StaticPlayer.Instance == null) return;
+                
+                
+                StaticPlayer.Instance.transform.position = enterPoint.transform.position;
         }
 
         public void SavePlayer()

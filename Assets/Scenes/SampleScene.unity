@@ -25857,6 +25857,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
+      propertyPath: enemyID
+      value: enemy3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
       propertyPath: enemyPrefabForBattle
       value: 
       objectReference: {fileID: 4070877570594470923, guid: 6f321f8e973986342bfc04aecc85abac, type: 3}
@@ -50753,6 +50757,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
+      propertyPath: enemyID
+      value: enemy2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
       propertyPath: enemyPrefabForBattle
       value: 
       objectReference: {fileID: 4070877570594470923, guid: 6f321f8e973986342bfc04aecc85abac, type: 3}
@@ -50890,6 +50898,10 @@ PrefabInstance:
     - target: {fileID: 1923604488647833188, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
+      propertyPath: enemyID
+      value: enemy1
       objectReference: {fileID: 0}
     - target: {fileID: 4894904685207704666, guid: 6bc64a652337ca64d8f9e419f97a89cf, type: 3}
       propertyPath: enemyPrefabForBattle
