@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Battle.Core;
 using Battle.DataHolders;
+using Data;
 using UnityEngine;
 
 namespace Battle.Player
@@ -26,7 +27,9 @@ namespace Battle.Player
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            Character = new Character(new Health(100), new Stats(), new Mana(100, 10));
+
+            var stats = new PlayerStats();
+            Character = new Character(new Health(100), stats, new Mana(stats.mana, stats.manaRegen));
             _activeAbilities.AddRange(playerAbilities.animatedAbilities);
         }
 
