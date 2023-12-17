@@ -1,2 +1,9 @@
+----------------------------------
 Shadow cast from tile map
 https://www.youtube.com/watch?v=n3tgimClTrI&list=LL&index=1&t=306s
+----------------------------------
+
+----------------------------------
+Debug.Log Rich Text colors
+https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html
+----------------------------------
