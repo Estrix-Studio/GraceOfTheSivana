@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Battle.Abilities
 {
-    [CreateAssetMenu(menuName = "Abilities/Doge")]
-    public class Doge : Ability
+    [CreateAssetMenu(menuName = "Abilities/MassHeal")]
+    public class MassHeal : Ability
     {
         public override void Use(Character owner, Character target)
         {
-            Debug.Log($"Character {owner} used Doge on {target}");
+            // todo add stats dependency
+            target.Heal(25);
         }
     }
 }

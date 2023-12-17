@@ -69,6 +69,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 9f9d446e7f926dc47bfff6ddd27df19b, type: 2}
     - target: {fileID: 9194680074353225932, guid: a01e68e8dc058254eb617ed469af7705, type: 3}
+      propertyPath: healAbility.manaCost
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194680074353225932, guid: a01e68e8dc058254eb617ed469af7705, type: 3}
+      propertyPath: attackAbility.manaCost
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9194680074353225932, guid: a01e68e8dc058254eb617ed469af7705, type: 3}
       propertyPath: attackAbility.animation
       value: 
       objectReference: {fileID: 7400000, guid: 7969f10b695ec284c8b47126b7aabec4, type: 2}
