@@ -23,7 +23,7 @@
 
         public virtual void TakeDamage(float amount)
         {
-            _health.TakeDamage(amount);
+            _health.TakeDamage(amount * (1 - Stats.vitality / 100.0f));
         }
 
         public virtual void Heal(float amount)
