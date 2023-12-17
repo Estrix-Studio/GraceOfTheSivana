@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da19a3bf3dd47899a324f12ad6dfc71, type: 3}
-  m_Name: DogeSkill
+  m_Script: {fileID: 11500000, guid: 4048f72e1e574161a5fa2a60e6c2cea1, type: 3}
+  m_Name: MassHeal
   m_EditorClassIdentifier: 
-  Name: Doge
+  Name: MassHeal
