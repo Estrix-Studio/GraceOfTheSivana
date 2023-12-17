@@ -10,10 +10,18 @@ namespace Adventure
         private MovingObject _movingObject;
 
         [SerializeField] private GameObject enemyPrefabForBattle;
-        
+     
+        [SerializeField] private string enemyID;
+
         private void Awake()
         {
             _movingObject = GetComponent<MovingObject>();
+            var enemyIsHere = PlayerPrefs.GetInt(enemyID, 1);
+        
+            if (enemyIsHere == 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +34,7 @@ namespace Adventure
                 StaticContext.EnemyPrefabForBattle = enemyPrefabForBattle;
                 SceneManager.MoveGameObjectToScene(other.gameObject, SceneManager.GetActiveScene());
                 SceneManager.LoadScene("EncounterScene");
+                PlayerPrefs.SetInt(enemyID, 0);
             }
         }
     }

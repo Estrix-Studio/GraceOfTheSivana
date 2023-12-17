@@ -46,6 +46,9 @@ namespace Systems.UI
         private void StartNewGame()
         {
             StaticContext.DoLoad = false;
+            PlayerPrefs.SetInt("enemy1", 1);
+            PlayerPrefs.SetInt("enemy2", 1);
+            PlayerPrefs.SetInt("enemy3", 1);
             SceneManager.LoadScene(firstGameplaySceneName);
         }
 
