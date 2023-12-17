@@ -32,6 +32,7 @@ namespace Adventure
             doLoad = StaticContext.DoLoad;
         }
 
+        
         private void Start()
         {
             print("loading");
@@ -58,6 +59,11 @@ namespace Adventure
 
         private void OnDestroy()
         {
+            if (Instance == this)
+            {
+                Instance = null;
+            }
+
             SceneManager.sceneLoaded -= OnSceneTransferred;
         }
 
@@ -102,13 +108,9 @@ namespace Adventure
 
         private void OnSceneTransferred(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "SampleScene" || scene.name == "Dungeon")
-            {
                 var enterPoint = FindObjectOfType<StartPoint>().transform.position;
                     
                 StaticPlayer.Instance.transform.position = enterPoint;
-            }
-            
         }
 
         public void SavePlayer()
