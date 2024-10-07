@@ -32,7 +32,7 @@ namespace Adventure
 
             CurrentSpeed = moveDirection.normalized * speed;
 
-            _rigidbody.velocity = CurrentSpeed;
+            _rigidbody.linearVelocity = CurrentSpeed;
         }
     }
 }
