@@ -38,7 +38,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -1435174141011959080}
-    m_Position: {x: 300, y: 100, z: 0}
+    m_Position: {x: 440, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9212351271581605471}
     m_Position: {x: 475, y: 275, z: 0}
@@ -109,7 +109,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CrabAnimController
+  m_Name: CrabBattle
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:

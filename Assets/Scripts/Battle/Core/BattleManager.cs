@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using Adventure;
 using Battle.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Battle.Core
 {
@@ -83,10 +85,10 @@ namespace Battle.Core
                     StartTurn(_enemyController);
                     break;
                 case EBattleState.Won:
-                    Debug.Log("You won!");
+                    PlayerWin();
                     break;
                 case EBattleState.Lost:
-                    Debug.Log("You lost!");
+                    PlayerLose();
                     break;
                 case EBattleState.FullCircle:
                     FullCirclePassed();
@@ -111,6 +113,17 @@ namespace Battle.Core
             _enemyController.FullCirclePassed();
 
             ContinueBattle();
+        }
+
+        private void PlayerWin()
+        {
+            StaticContext.DoLoad = true;
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        private void PlayerLose()
+        {
+            SceneManager.LoadScene("EncounterScene");
         }
     }
 }
