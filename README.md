@@ -14,5 +14,3 @@ No one shall be subjected to arbitrary arrest, detention or exile. Everyone is e
 
 
 [Itch.io - Grace of the Sivana](https://devcinnamon.itch.io/grace-of-the-sivana)
-
-[Youtube Devlog Video](https://youtu.be/LcLjx3vhJBw)
